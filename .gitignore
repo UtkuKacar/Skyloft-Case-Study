@@ -22,6 +22,7 @@
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
+/[Pp]rofilerCaptures/
 
 # Recordings can get excessive in size
 /[Rr]ecordings/
@@ -33,9 +34,11 @@
 /[Aa]ssets/Plugins/Editor/JetBrains*
 # Jetbrains Rider personal-layer settings
 *.DotSettings.user
+.idea/
 
-# Visual Studio cache directory
+# Visual Studio / Visual Studio Code cache directory
 .vs/
+.vscode/
 
 # Gradle cache directory
 .gradle/
