@@ -7,35 +7,22 @@ using Skyloft.Player;
 namespace Skyloft.Editor
 {
     /// <summary>
-    /// Editor utility that runs automatically and provides a menu item to configure the Player prefab,
+    /// Explicit editor menu utility to configure the Player prefab,
     /// attach the rifle to the right hand bone (mixamorig:RightHand), configure AnimatorController motions,
     /// and enforce mobile shadow settings.
     /// </summary>
-    [InitializeOnLoad]
     public static class PlayerWeaponSetupEditor
     {
         private const string PlayerFbxPath = "Assets/Art/Original/player/player.fbx";
         private const string RiflePrefabPath = "Assets/Prefabs/Weapons/Rifle.prefab";
         private const string PlayerPrefabPath = "Assets/Prefabs/Player/Player.prefab";
-        private const string AnimatorControllerPath = "Assets/Animations/PlayerAnimator.controller";
-
-        private static bool s_HasRun = false;
-
-        static PlayerWeaponSetupEditor()
-        {
-            EditorApplication.delayCall += () =>
-            {
-                if (!s_HasRun)
-                {
-                    s_HasRun = true;
-                    SetupPlayerWeaponAndVisuals();
-                }
-            };
-        }
+        private const string AnimatorControllerPath = "Assets/Animations/Player/PlayerAnimator.controller";
 
         [MenuItem("Skyloft/Setup Player Weapon & Visuals")]
         public static void SetupPlayerWeaponAndVisuals()
         {
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
+                return;
             Debug.Log("[Skyloft] Starting Player Weapon and Visual Setup...");
 
             SetupAnimatorClips();

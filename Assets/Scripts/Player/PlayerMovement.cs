@@ -24,6 +24,7 @@ namespace Skyloft.Player
 
         private CharacterController characterController;
         private float verticalVelocity = 0f;
+        private Transform facingTarget;
 
         public float MovementSpeed => movementSpeed;
         public bool IsMoving { get; private set; }
@@ -58,10 +59,13 @@ namespace Skyloft.Player
 
             IsMoving = inputMagnitude > 0.001f;
 
-            // Rotate towards movement direction when input is active
-            if (IsMoving)
+            // Movement owns rotation; combat supplies an optional facing target.
+            Vector3 facingDirection = facingTarget != null
+                ? facingTarget.position - transform.position : moveDirection;
+            facingDirection.y = 0f;
+            if (facingDirection.sqrMagnitude > 0.0001f)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+                Quaternion targetRotation = Quaternion.LookRotation(facingDirection, Vector3.up);
                 transform.rotation = Quaternion.RotateTowards(
                     transform.rotation,
                     targetRotation,
@@ -88,6 +92,14 @@ namespace Skyloft.Player
         public void SetMovementSpeed(float newSpeed)
         {
             movementSpeed = Mathf.Max(0f, newSpeed);
+        }
+
+        public void SetFacingTarget(Transform newTarget) => facingTarget = newTarget;
+
+        private void OnDisable()
+        {
+            IsMoving = false;
+            verticalVelocity = 0f;
         }
 
         private void OnValidate()
