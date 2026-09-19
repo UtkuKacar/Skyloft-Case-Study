@@ -55,8 +55,6 @@ MCP workflows are performed using:
 
 `Read Unity state → Apply changes → Verify result`
 
-Detailed development and MCP records are available in [`DEVELOPMENT_REPORT.md`](DEVELOPMENT_REPORT.md).
-
 ## 📌 Remaining Work
 
 * Wave spawning
