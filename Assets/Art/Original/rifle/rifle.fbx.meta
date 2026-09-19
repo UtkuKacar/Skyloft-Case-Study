@@ -3,7 +3,8 @@ guid: 9866f13a6e82f2d4b8036bd7868c751f
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+    SAR80: {fileID: 2100000, guid: c1000000000000000000000000000003, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
