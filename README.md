@@ -88,8 +88,6 @@ MCP workflows follow:
 
 `Read Unity state → Apply changes → Verify result`
 
-AI-assisted engineering decisions are documented separately in `AI_WORK_LOG.md`.
-
 ## 📌 Remaining Work
 
 * Baseline performance profiling
