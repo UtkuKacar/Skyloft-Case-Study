@@ -194,7 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Skyloft.Player.PlayerCombat
   attackRange: 8
   damage: 15
-  fireInterval: 0.6
+  fireInterval: 0.5
   fireFeedback: {fileID: 1970199060073787529}
 --- !u!114 &2523753848196482513
 MonoBehaviour:

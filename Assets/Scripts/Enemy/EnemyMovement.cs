@@ -12,7 +12,7 @@ namespace Skyloft.Enemy
         private const float TargetDistanceTolerance = 0.01f;
 
         [SerializeField] private Transform target;
-        [SerializeField, Min(0f)] private float movementSpeed = 2f;
+        [SerializeField, Min(0f)] private float movementSpeed = 6f;
         [SerializeField, Min(0f)] private float rotationSpeed = 360f;
         [SerializeField, Min(0.01f)] private float stoppingDistance = 0.9f;
 

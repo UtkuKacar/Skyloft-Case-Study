@@ -13,7 +13,7 @@ namespace Skyloft.Player
         private const float AimAlignment = 0.9781476f; // Within 12 degrees before firing.
         [SerializeField, Min(0.1f)] private float attackRange = 8f;
         [SerializeField, Min(0f)] private float damage = 15f;
-        [SerializeField, Min(0.05f)] private float fireInterval = 0.6f;
+        [SerializeField, Min(0.05f)] private float fireInterval = 0.5f;
         [SerializeField] private RifleFireFeedback fireFeedback;
 
         private PlayerHealth health;

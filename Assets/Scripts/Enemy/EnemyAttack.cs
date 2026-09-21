@@ -11,7 +11,7 @@ namespace Skyloft.Enemy
         [SerializeField] private PlayerHealth targetHealth;
         [SerializeField, Min(0.1f)] private float attackRange = 1.2f;
         [SerializeField, Min(0f)] private float damage = 10f;
-        [SerializeField, Min(0.05f)] private float attackInterval = 1.25f;
+        [SerializeField, Min(0.05f)] private float attackInterval = 0.5f;
 
         private EnemyMovement movement;
         private EnemyHealth health;

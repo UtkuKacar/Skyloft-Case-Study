@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Skyloft.Enemy
@@ -11,6 +12,7 @@ namespace Skyloft.Enemy
         private EnemyMovement movement;
         private CharacterController characterController;
         private EnemyAttack attack;
+        public event Action<EnemyDeath> Retired;
 
         private void Awake()
         {
@@ -41,6 +43,7 @@ namespace Skyloft.Enemy
                 attack.enabled = false;
             characterController.enabled = false;
             gameObject.SetActive(false);
+            Retired?.Invoke(this);
         }
     }
 }

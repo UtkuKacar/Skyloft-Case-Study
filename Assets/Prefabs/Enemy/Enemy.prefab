@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Skyloft.Enemy.EnemyMovement
   target: {fileID: 0}
-  movementSpeed: 2
+  movementSpeed: 6
   rotationSpeed: 360
   stoppingDistance: 0.9
 --- !u!114 &9212602820170557701
@@ -244,7 +244,7 @@ MonoBehaviour:
   targetHealth: {fileID: 0}
   attackRange: 1.2
   damage: 10
-  attackInterval: 1.25
+  attackInterval: 0.5
 --- !u!1 &4881665404678627286
 GameObject:
   m_ObjectHideFlags: 0

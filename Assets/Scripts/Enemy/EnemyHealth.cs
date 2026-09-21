@@ -17,6 +17,8 @@ namespace Skyloft.Enemy
         public Transform CachedTransform { get; private set; }
         public event Action<float, float> HealthChanged;
         public event Action Died;
+        private bool damageEnabled = true;
+        public void SetDamageEnabled(bool value) => damageEnabled = value;
 
         private void Awake()
         {
@@ -32,7 +34,7 @@ namespace Skyloft.Enemy
 
         public void TakeDamage(float damage)
         {
-            if (IsDead || !isActiveAndEnabled || damage <= 0f ||
+            if (!damageEnabled || IsDead || !isActiveAndEnabled || damage <= 0f ||
                 float.IsNaN(damage) || float.IsInfinity(damage))
             {
                 return;
@@ -47,7 +49,10 @@ namespace Skyloft.Enemy
             }
             HealthChanged?.Invoke(CurrentHealth, maxHealth);
             if (died)
+            {
+                EnemyRegistry.NotifyDeath(this);
                 Died?.Invoke();
+            }
         }
 
         private void OnValidate()

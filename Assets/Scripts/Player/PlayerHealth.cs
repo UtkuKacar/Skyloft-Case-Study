@@ -13,6 +13,8 @@ namespace Skyloft.Player
         public bool IsDead { get; private set; }
         public event Action<float, float> HealthChanged;
         public event Action Died;
+        private bool damageEnabled = true;
+        public void SetDamageEnabled(bool value) => damageEnabled = value;
 
         private void Awake()
         {
@@ -23,7 +25,7 @@ namespace Skyloft.Player
 
         public void TakeDamage(float damage)
         {
-            if (IsDead || !isActiveAndEnabled || damage <= 0f ||
+            if (!damageEnabled || IsDead || !isActiveAndEnabled || damage <= 0f ||
                 float.IsNaN(damage) || float.IsInfinity(damage))
                 return;
 

@@ -21,6 +21,8 @@ namespace Skyloft.Player
         {
             get
             {
+                if (!isActiveAndEnabled)
+                    return Vector2.zero;
                 // Primary: Virtual Joystick
                 if (virtualJoystick != null && virtualJoystick.MoveInput.sqrMagnitude > 0f)
                 {

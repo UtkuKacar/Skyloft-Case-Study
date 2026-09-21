@@ -9,6 +9,8 @@ namespace Skyloft.Enemy
         private static readonly List<EnemyHealth> Enemies = new List<EnemyHealth>(64);
 
         public static int Count => Enemies.Count;
+        public static event System.Action<EnemyHealth> EnemyDied;
+        internal static void NotifyDeath(EnemyHealth enemy) => EnemyDied?.Invoke(enemy);
         public static EnemyHealth GetAt(int index) => Enemies[index];
 
         internal static void Register(EnemyHealth enemy)
@@ -20,6 +22,10 @@ namespace Skyloft.Enemy
         internal static void Unregister(EnemyHealth enemy) => Enemies.Remove(enemy);
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        private static void Reset() => Enemies.Clear();
+        private static void Reset()
+        {
+            Enemies.Clear();
+            EnemyDied = null;
+        }
     }
 }
