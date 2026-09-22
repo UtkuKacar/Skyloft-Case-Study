@@ -15,3 +15,4 @@ MonoBehaviour:
   spawnInterval: 4
   enemiesPerBatch: 2
   maxActiveEnemies: 12
+  enemyMovementSpeed: 4.5

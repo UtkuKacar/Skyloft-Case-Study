@@ -126,7 +126,8 @@ GameObject:
   - component: {fileID: 2932491773573992867}
   - component: {fileID: 8003171258671251552}
   - component: {fileID: 485487509375525199}
-  m_Layer: 0
+  - component: {fileID: 5849955104267876023}
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +164,7 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
@@ -191,6 +192,11 @@ MonoBehaviour:
   movementSpeed: 6
   rotationSpeed: 360
   stoppingDistance: 0.9
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  obstacleProbeDistance: 1.4
+  avoidanceCommitDuration: 0.75
 --- !u!114 &9212602820170557701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e535cbee601fb3469b5f0a52655caa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Skyloft.Enemy.EnemyAnimationController
-  animator: {fileID: 2410593505883718805}
+  animator: {fileID: 5849955104267876023}
 --- !u!114 &485487509375525199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,8 +249,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Skyloft.Enemy.EnemyAttack
   targetHealth: {fileID: 0}
   attackRange: 1.2
+  impactRange: 1.5
+  stoppingBuffer: 0.15
   damage: 10
   attackInterval: 0.5
+  attackRecoveryDuration: 0.25
+  lungeDistance: 0.6
+  lungeDuration: 0.18
+  impactHalfAngle: 60
+--- !u!95 &5849955104267876023
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3343983035980454686}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 7999eee0b6d59fe4bb7923ce7ace6a91, type: 3}
+  m_Controller: {fileID: 9100000, guid: d06c07fd87166ec4aa20c22fffd9ff37, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4881665404678627286
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,16 +470,12 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 7999eee0b6d59fe4bb7923ce7ace6a91, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7999eee0b6d59fe4bb7923ce7ace6a91, type: 3}
---- !u!95 &2410593505883718805 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 7999eee0b6d59fe4bb7923ce7ace6a91, type: 3}
-  m_PrefabInstance: {fileID: 8079092334673836292}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8616523880190566127 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7999eee0b6d59fe4bb7923ce7ace6a91, type: 3}

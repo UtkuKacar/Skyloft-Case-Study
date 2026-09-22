@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 1970199060073787529}
   - component: {fileID: 7460180424532837021}
   - component: {fileID: 2523753848196482513}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1000000000000000000000000000002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 6
+  movementSpeed: 5.5
   rotationSpeed: 720
   gravity: 20
   playerInput: {fileID: 100004}

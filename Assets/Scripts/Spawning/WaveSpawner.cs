@@ -18,11 +18,14 @@ namespace Skyloft.Spawning
         [SerializeField, Min(0.5f)] private float boundaryInset = 1f;
         [SerializeField, Min(1f)] private float minimumPlayerDistance = 8f;
         [SerializeField, Min(0.5f)] private float minimumEnemySpacing = 1f;
+        [SerializeField] private LayerMask environmentMask;
 
         private Bounds spawnBounds;
         private float nextBatchTime;
         private bool playable = true;
         private bool configured;
+        private float enemyCapsuleRadius;
+        private float enemyCapsuleHeight;
 
         public DifficultyConfig Difficulty => difficulty;
         public bool CanSpawn => configured && playable && difficulty != null &&
@@ -39,6 +42,8 @@ namespace Skyloft.Spawning
                 configured = capsule != null && enemyPrefab.GetComponent<EnemyDeath>() != null;
                 if (configured)
                 {
+                    enemyCapsuleRadius = capsule.radius + capsule.skinWidth;
+                    enemyCapsuleHeight = capsule.height;
                     float inset = Mathf.Max(boundaryInset, capsule.radius + capsule.skinWidth);
                     spawnBounds = arena.bounds;
                     configured = spawnBounds.size.x > inset * 2f && spawnBounds.size.z > inset * 2f;
@@ -98,6 +103,13 @@ namespace Skyloft.Spawning
                 offset.y = 0f;
                 if (offset.sqrMagnitude < playerDistanceSquared)
                     continue;
+                Vector3 capsuleBottom = position + Vector3.up * enemyCapsuleRadius;
+                Vector3 capsuleTop = position + Vector3.up *
+                    Mathf.Max(enemyCapsuleRadius, enemyCapsuleHeight - enemyCapsuleRadius);
+                if (environmentMask.value != 0 && Physics.CheckCapsule(
+                    capsuleBottom, capsuleTop, enemyCapsuleRadius, environmentMask,
+                    QueryTriggerInteraction.Ignore))
+                    continue;
                 bool occupied = false;
                 for (int i = 0; i < EnemyRegistry.Count; i++)
                 {
@@ -123,6 +135,7 @@ namespace Skyloft.Spawning
         {
             EnemyAttack instance = Instantiate(enemyPrefab, position, Quaternion.identity, spawnParent);
             instance.GetComponent<EnemyDeath>().Retired += ReleaseEnemy;
+            instance.GetComponent<EnemyMovement>().SetMovementSpeed(difficulty.EnemyMovementSpeed);
             instance.SetTarget(player);
         }
 

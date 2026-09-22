@@ -12,6 +12,7 @@
 * **Render Pipeline:** URP
 * **Platform:** Android / Portrait
 * **Input:** Unity New Input System
+* **Packages:** Universal Render Pipeline, Input System
 * **Scenes:** `MainMenu.unity`, `Game.unity`, `Result.unity`
 
 ## ✨ Implemented Features
@@ -23,27 +24,60 @@
 * Player HUD and enemy health bars
 * Automatic nearest-enemy targeting and rifle fire
 * Enemy pursuit, attack and death handling
+* Animation-synchronized melee damage
+* Lightweight enemy obstacle avoidance
 * Wave-based enemy spawning
+* Safe spawn-position validation
 * Easy / Medium / Hard difficulty selection
-* Configurable enemy count and spawn frequency
+* Difficulty-based spawn pressure and enemy movement speed
 * 3-minute survival timer
 * Session kill counter
 * Persistent total kill count
 * Win / Lose game flow
 * Result screen with kill statistics
-* Replay and Main Menu options
+* Replay and Main Menu navigation
 * Fade transitions between scenes
-* Player and enemy death handling
+* Lightweight placeholder arena built with Unity primitives
+
+## 🗺️ Arena
+
+The game uses a lightweight **50 × 50** placeholder arena built with Unity primitive objects.
+
+The layout includes an open central combat area, wide movement lanes and simple obstacles.
+
+Players and enemies collide with the environment, while Player ↔ Enemy physical blocking remains disabled.
+
+Enemies use lightweight obstacle avoidance to navigate around arena structures.
 
 ## 🎯 Difficulty
 
-The game uses the same gameplay scene for all difficulty levels.
+All difficulty levels use the same `Game.unity` scene and are configured through `DifficultyConfig`.
 
-Difficulty is configured through `DifficultyConfig` assets and applied by the `WaveSpawner`.
+* **Easy:** 4s spawn interval / 2 enemies per wave / max 12 / enemy speed 4.5
+* **Medium:** 2.5s spawn interval / 3 enemies per wave / max 24 / enemy speed 5
+* **Hard:** 1.5s spawn interval / 4 enemies per wave / max 40 / enemy speed 5.5
 
-* **Easy:** 4s spawn interval / 2 enemies per wave / max 12
-* **Medium:** 2.5s spawn interval / 3 enemies per wave / max 24
-* **Hard:** 1.5s spawn interval / 4 enemies per wave / max 40
+Player movement speed is **5.5**.
+
+## ⚔️ Combat
+
+The player automatically targets and fires at the nearest living enemy within weapon range.
+
+Enemies pursue the Player and use animation-synchronized melee attacks.
+
+The attack behaviour is designed to remain threatening while preventing enemies from physically sticking to or trapping the Player.
+
+## 🌊 Spawning
+
+Enemies are spawned through `WaveSpawner` using the selected `DifficultyConfig`.
+
+Spawn positions are validated before instantiation to prevent enemies from spawning inside arena structures, outside playable bounds or too close to the Player.
+
+Current spawn settings include:
+
+* minimum Player distance: `8`
+* enemy spacing: `1`
+* maximum candidate attempts: `12`
 
 ## 🎮 Controls
 
@@ -63,7 +97,7 @@ Use **WASD** or **Arrow Keys** to move.
 
 * Survive for **3 minutes** to win.
 * Reaching **0 HP** results in a loss.
-* **Replay** restarts with the selected difficulty.
+* **Replay** restarts the game with the selected difficulty.
 * **Main Menu** allows selecting a different difficulty.
 
 ## 📊 Gameplay HUD
@@ -84,23 +118,8 @@ Use **WASD** or **Arrow Keys** to move.
 * **ChatGPT** — architecture, debugging and technical review
 * **Unity Coplay MCP** — direct Unity Editor inspection, modification and verification
 
-MCP workflows follow:
+MCP workflow:
 
 `Read Unity state → Apply changes → Verify result`
 
-## 📌 Remaining Work
-
-* Baseline performance profiling
-* Object pooling
-* Asset optimization
-* Runtime optimization
-* Baseline vs optimized performance comparison
-* Android build and device testing
-* Final APK
-* Final demo video
-
-## ⚠️ Known Limitations
-
-* Rifle attacks currently use direct damage instead of physical projectiles.
-* Final profiling and optimization have not been completed yet.
-* Android device validation has not been completed yet.
+AI-assisted engineering decisions are documented in `AI_WORK_LOG.md`.

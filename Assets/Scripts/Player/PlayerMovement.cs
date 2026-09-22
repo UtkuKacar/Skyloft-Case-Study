@@ -11,7 +11,7 @@ namespace Skyloft.Player
     {
         [Header("Movement Configuration")]
         [Tooltip("Horizontal movement speed in meters per second.")]
-        [SerializeField] private float movementSpeed = 6f;
+        [SerializeField] private float movementSpeed = 5.5f;
 
         [Tooltip("Rotation speed in degrees per second.")]
         [SerializeField] private float rotationSpeed = 720f;

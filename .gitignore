@@ -13,6 +13,14 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
+# Local editor utilities and Unity recovery scenes
+/Assets/Scripts/Editor/
+/Assets/Scripts/Editor.meta
+/Assets/_Recovery/
+/Assets/_Recovery.meta
+# Local development notes
+/AI_WORK_LOG.md
+/DEVELOPMENT_REPORT.md
 *.log
 
 # By default unity supports Blender asset imports, *.blend1 blender files do not need to be commited to version control.
