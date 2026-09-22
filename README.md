@@ -10,7 +10,7 @@
 
 * **Unity:** 6000.3.14f1
 * **Render Pipeline:** URP
-* **Platform:** Android / Portrait
+* **Platform:** Android / Landscape
 * **Input:** Unity New Input System
 * **Packages:** Universal Render Pipeline, Input System
 * **Scenes:** `MainMenu.unity`, `Game.unity`, `Result.unity`
@@ -121,5 +121,3 @@ Use **WASD** or **Arrow Keys** to move.
 MCP workflow:
 
 `Read Unity state → Apply changes → Verify result`
-
-AI-assisted engineering decisions are documented in `AI_WORK_LOG.md`.
