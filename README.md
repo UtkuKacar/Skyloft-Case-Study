@@ -117,6 +117,7 @@ Use **WASD** or **Arrow Keys** to move.
 
 * **ChatGPT** — architecture, debugging and technical review
 * **Unity Coplay MCP** — direct Unity Editor inspection, modification and verification
+* **Antigravity & Codex** - AI-assisted code implementation, refactoring and codebase analysis
 
 MCP workflow:
 
