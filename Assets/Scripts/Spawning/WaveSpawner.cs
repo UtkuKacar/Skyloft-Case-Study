@@ -137,6 +137,9 @@ namespace Skyloft.Spawning
             instance.GetComponent<EnemyDeath>().Retired += ReleaseEnemy;
             instance.GetComponent<EnemyMovement>().SetMovementSpeed(difficulty.EnemyMovementSpeed);
             instance.SetTarget(player);
+            var renderLOD = instance.GetComponent<EnemyRenderLOD>();
+            if (renderLOD != null)
+                renderLOD.SetPlayer(player);
         }
 
         // Static callback stays valid if the spawner is disabled or removed before its enemies die.

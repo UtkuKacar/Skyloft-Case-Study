@@ -109,6 +109,7 @@ namespace Skyloft.Core
                 enemy.SetDamageEnabled(false);
                 enemy.GetComponent<EnemyAttack>().enabled = false;
                 enemy.GetComponent<EnemyMovement>().enabled = false;
+                enemy.GetComponent<EnemyRenderLOD>()?.SetPlayer(null);
             }
             RunSession.StoreResult(result == RunState.Won, SessionKills);
             StartCoroutine(ShowResult(result == RunState.Lost ? deathPoseDelay : 0.25f));

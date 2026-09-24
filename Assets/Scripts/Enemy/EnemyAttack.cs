@@ -1,3 +1,4 @@
+using System;
 using Skyloft.Player;
 using UnityEngine;
 
@@ -38,6 +39,7 @@ namespace Skyloft.Enemy
         public bool IsAttacking { get; private set; }
         public bool IsRecovering => IsAttacking && impactConsumed;
         public PlayerHealth Target => targetHealth;
+        public event Action<bool> AttackStateChanged;
 
         private void Awake()
         {
@@ -87,6 +89,7 @@ namespace Skyloft.Enemy
                 impactConsumed = false;
                 nextAttackTime = Time.time + attackInterval;
                 attackDirection = offset.sqrMagnitude > 0.0001f ? offset.normalized : transform.forward;
+                AttackStateChanged?.Invoke(true);
                 movement.BeginAttackLunge(attackDirection, lungeDistance, lungeDuration);
             }
 
@@ -135,10 +138,13 @@ namespace Skyloft.Enemy
 
         private void CancelAttack()
         {
+            bool wasAttacking = IsAttacking;
             if (movement != null)
                 movement.ClearAttackCommitment();
             IsAttacking = false;
             impactConsumed = true;
+            if (wasAttacking)
+                AttackStateChanged?.Invoke(false);
         }
 
         private void OnDisable()
